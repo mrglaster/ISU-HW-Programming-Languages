@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestInfixConverter" time="0.103" tests="10" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="20"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1251"/>
+    <property name="java.class.path" value="C:\Users\Glaster\Desktop\df\ISU-HW-Programming-Languages\prefix-to-infix\target\test-classes;C:\Users\Glaster\Desktop\df\ISU-HW-Programming-Languages\prefix-to-infix\target\classes;C:\Users\Glaster\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\Glaster\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Glaster\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Glaster\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\Glaster\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\Glaster\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Singapore"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="20"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="RU"/>
+    <property name="sun.boot.library.path" value="C:\Program Files (x86)\jdk\jdk-20.0.1\bin"/>
+    <property name="sun.java.command" value="C:\Users\Glaster\AppData\Local\Temp\surefire18430309840460500434\surefirebooter14985274779318034894.jar C:\Users\Glaster\AppData\Local\Temp\surefire18430309840460500434 2023-10-08T13-50-41_970-jvmRun1 surefire3394691445386565682tmp surefire_07821573630184537061tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\Glaster\Desktop\df\ISU-HW-Programming-Languages\prefix-to-infix\target\test-classes;C:\Users\Glaster\Desktop\df\ISU-HW-Programming-Languages\prefix-to-infix\target\classes;C:\Users\Glaster\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\Glaster\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Glaster\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Glaster\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\Glaster\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\Glaster\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Glaster"/>
+    <property name="user.language" value="ru"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-04-18"/>
+    <property name="java.home" value="C:\Program Files (x86)\jdk\jdk-20.0.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\Glaster\Desktop\df\ISU-HW-Programming-Languages\prefix-to-infix"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\Glaster\AppData\Local\Temp\surefire18430309840460500434\surefirebooter14985274779318034894.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="20.0.1+9-29"/>
+    <property name="user.name" value="Glaster"/>
+    <property name="stdout.encoding" value="Cp1251"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\Glaster\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\Glaster\AppData\Local\Temp\"/>
+    <property name="java.version" value="20.0.1"/>
+    <property name="user.dir" value="C:\Users\Glaster\Desktop\df\ISU-HW-Programming-Languages\prefix-to-infix"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1251"/>
+    <property name="java.library.path" value="C:\Program Files (x86)\jdk\jdk-20.0.1\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\PuTTY\;E:\PostgreSQL\15\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Users\Glaster\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\jdk\jdk-20.0.1\bin;C:\Users\Glaster\AppData\Local\Programs\Python\Python311;C:\Users\Glaster\AppData\Local\Programs\Python\Python311\Scripts;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.2\bin;;E:\PostgreSQL\15\bin;E:\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.2\plugins\maven\lib\maven3\bin;E:\DjVuLibre;C:\Users\Glaster\.dotnet\tools;C:\Users\Glaster\AppData\Roaming\npm;C:\Program Files (x86)\gcc;C:\Program Files (x86)\gcc\bin;C:\Program Files (x86)\Nmap;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1251"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="20.0.1+9-29"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="64.0"/>
+  </properties>
+  <testcase name="testSingleNumber" classname="TestInfixConverter" time="0.052"/>
+  <testcase name="testRegularWork" classname="TestInfixConverter" time="0.012"/>
+  <testcase name="testSingleOperator" classname="TestInfixConverter" time="0.002"/>
+  <testcase name="testUnknownOperator" classname="TestInfixConverter" time="0.003"/>
+  <testcase name="testTooManyOperators" classname="TestInfixConverter" time="0.002"/>
+  <testcase name="testTooManyNumbers" classname="TestInfixConverter" time="0.001"/>
+  <testcase name="testNullInputString" classname="TestInfixConverter" time="0.002"/>
+  <testcase name="testZeroLengthInputString" classname="TestInfixConverter" time="0.002"/>
+  <testcase name="testTooManyEmptyStrings" classname="TestInfixConverter" time="0.002"/>
+  <testcase name="testSameCount" classname="TestInfixConverter" time="0.002"/>
+</testsuite>
