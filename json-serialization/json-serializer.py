@@ -1,6 +1,5 @@
-import json
 from enum import Enum
-import struct
+import json
 
 
 class Alignment(Enum):
@@ -8,95 +7,74 @@ class Alignment(Enum):
     VERTICAL = 2
 
 
-class Widget():
+class AlignmentEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Alignment):
+            return obj.value
+        return super().default(obj)
+
+
+class Widget:
+    ATTRIBUTE_MAP = {
+        'MainWindow': {'title': 'title'},
+        'Layout': {'alignment': 'alignment'},
+        'LineEdit': {'max_length': 'max_length'},
+        'ComboBox': {'items': 'items'},
+    }
+
+    TYPE_MAP = {'MainWindow': 0, 'Layout': 1, 'LineEdit': 2, 'ComboBox': 3}
 
     def __init__(self, parent):
         self.parent = parent
         self.children = []
         if self.parent is not None:
-            self.parent.add_child(self)
+            self.parent.add_children(self)
+
+    def get_parent(self):
+        return self.parent
+
+    def get_children(self):
+        return self.children
+
+    def add_children(self, children: "Widget"):
+        self.children.append(children)
+
+    def to_json(self):
+        result = {}
+        classname = self.__class__.__name__
+        attr_map = self.ATTRIBUTE_MAP.get(classname, {})
+
+        result[classname] = {attr_name: getattr(self, attr) for attr, attr_name in attr_map.items()}
+        result['children'] = [child.to_json() for child in self.children]
+
+        return result
 
     def to_binary(self, generation=0, count_brother=0):
-        d = {'MainWindow': 0, 'Layout': 1, 'LineEdit': 2, 'ComboBox': 3}
+        classname = self.__class__.__name__
+        type_code = self.TYPE_MAP.get(classname, 0)
         result = {
-            'type': d[self.__class__.__name__],
-            'generation': generation,
+            'type': type_code,
+            'generation': generation + 1 + count_brother,
             'count_brother': count_brother,
         }
 
-        if isinstance(self, MainWindow):
+        if classname == 'MainWindow':
             result['title'] = self.title
-        elif isinstance(self, Layout):
+        elif classname == 'Layout':
             result['alignment'] = 1 if self.alignment.name.endswith('HORIZONTAL') else 2
-            result['generation'] = generation + 1 + count_brother
-        elif isinstance(self, LineEdit):
+        elif classname == 'LineEdit':
             result['max_length'] = self.max_length
-            result['generation'] = generation + 1 + count_brother
-        elif isinstance(self, ComboBox):
+        elif classname == 'ComboBox':
             result['items'] = self.items
-            result['generation'] = generation + 1 + count_brother
 
         result['children'] = [child.to_binary(generation, i) for i, child in enumerate(self.children)]
         return result
-
-    @classmethod
-    def from_binary(cls, data, number=0, history=None, buf_generation=None):
-        if buf_generation is None:
-            buf_generation = [0]
-        if history is None:
-            history = []
-        if isinstance(data, str):
-            data_dict = json.loads(data)
-        else:
-            data_dict = data
-        class_name = data_dict['type']
-        h_buf = -1
-        if class_name == 0:  # MainWindow
-            title = data_dict.get('title', '')
-            select = MainWindow(title)
-            history.append(select)
-        elif class_name == 1:  # Layout
-            h_buf = data_dict.get('generation', 0)
-            alignment = data_dict.get('alignment', 1)
-            select = Layout(history[h_buf], Alignment(alignment))
-            position = 1 + buf_generation[h_buf]
-            for i in range(h_buf):
-                position += buf_generation[i]
-            history.insert(position, select)
-        elif class_name == 2:  # LineEdit
-            h_buf = data_dict.get('generation', 0)
-            max_length = data_dict.get('max_length', "")
-            select = LineEdit(history[h_buf], int(max_length))
-            if len(buf_generation) < h_buf + 1:
-                buf_generation.append(0)
-            position = 1 + buf_generation[h_buf]
-            for i in range(h_buf):
-                position += buf_generation[i]
-            history.insert(position, select)
-        elif class_name == 3:  # ComboBox
-            h_buf = data_dict.get('generation', 0)
-            items = data_dict.get('items', [])
-            select = ComboBox(history[h_buf], items)
-            if len(buf_generation) < h_buf + 1:
-                buf_generation.append(0)
-            position = 1 + buf_generation[h_buf]
-            for i in range(h_buf):
-                position += buf_generation[i]
-            history.insert(position, select)
-
-        if 'children' in data_dict:
-            for i, child_data in enumerate(data_dict['children']):
-                cls.from_binary(json.dumps(child_data), 0, history, buf_generation)
-        return history[0]
 
     def __str__(self):
         return f"{self.__class__.__name__}{self.children}"
 
     def __repr__(self):
         return str(self)
-
-    def add_child(self, child: "Widget"):
-        self.children.append(child)
 
 
 class MainWindow(Widget):
@@ -119,12 +97,38 @@ class LineEdit(Widget):
         super().__init__(parent)
         self.max_length = max_length
 
+    def __str__(self):
+        return f"{self.__class__.__name__}: {self.max_length}"
+
 
 class ComboBox(Widget):
 
     def __init__(self, parent, items):
         super().__init__(parent)
         self.items = items
+
+    def __str__(self):
+        return f"{self.__class__.__name__}: {self.items}"
+
+
+def from_json(data, parent=None):
+    class_name = next(iter(data))
+    attr_map = Widget.ATTRIBUTE_MAP.get(class_name, {})
+    attr_values = data[class_name]
+
+    if class_name == 'MainWindow':
+        widget = globals()[class_name](attr_values['title'])
+    else:
+        widget = globals()[class_name](parent, **{attr: attr_values[attr_name] for attr, attr_name in attr_map.items()})
+
+    if 'children' in data:
+        for child_data in data['children']:
+            from_json(child_data, parent=widget)
+
+    return widget
+
+
+
 
 
 app = MainWindow("Application")
@@ -137,12 +141,9 @@ edit2 = LineEdit(layout1, 30)
 box1 = ComboBox(layout2, [1, 2, 3, 4])
 box2 = ComboBox(layout2, ["a", "b", "c"])
 
-print(app)
-
-bts = app.to_binary()
-print(f"Binary data length {len(bts)}")
-print(bts)
-
-new_app = MainWindow.from_binary(bts)
-print(new_app)
-print(new_app.children[1].children[1].items)
+print(f"app: {app}")
+bts = app.to_json()
+json_data = json.dumps(bts, cls=AlignmentEncoder)  # Use the custom encoder here
+print(f"Serialized to JSON data: {json_data}")
+parsed = json.loads(json_data)
+print(f"Parsed from json: {from_json(parsed)}")
