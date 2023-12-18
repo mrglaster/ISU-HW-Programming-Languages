@@ -3,14 +3,14 @@ Description= EP Arduino Service Data Collector
 After=network.target
 
 [Service]
-ExecStart=python main.py
-WorkingDirectory=/home/user/arduino_data_collector_pristavka
+ExecStart=python3 main.py
+WorkingDirectory=/home/user/arduino_data_collector_pristavka/
 Type=simple
 Restart=always
 RestartSec=10
 StandardOutput=null
 
-User=simurg_app
+User=user
 
 [Install]
 WantedBy=multi-user.target
